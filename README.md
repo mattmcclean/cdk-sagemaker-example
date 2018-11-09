@@ -1,5 +1,7 @@
-# Useful commands
+# cdk-sagemaker-example
+An example project showing how to use the AWS CDK with Amazon SageMaker notebook instances
 
+# Useful commands
  * `npm run build`   compile typescript to js
  * `npm run watch`   watch for changes and compile
  * `cdk deploy`      deploy this stack to your default AWS account/region
