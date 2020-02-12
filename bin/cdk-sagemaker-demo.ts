@@ -1,6 +1,8 @@
 #!/usr/bin/env node
-import cdk = require('@aws-cdk/cdk');
-import { SageMakerNotebook } from './sagemakernb';
+import 'source-map-support/register';
+import * as cdk from '@aws-cdk/core';
+import { SageMakerNotebook } from '../lib/sagemakernb';
+
 
 class CdkSagemakerDemoStack extends cdk.Stack {
   constructor(parent: cdk.App, name: string, props?: cdk.StackProps) {
@@ -17,4 +19,3 @@ class CdkSagemakerDemoStack extends cdk.Stack {
 
 const app = new cdk.App();
 new CdkSagemakerDemoStack(app, 'CdkSagemakerDemoStack');
-app.run();

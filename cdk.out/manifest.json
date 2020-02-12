@@ -1,0 +1,82 @@
+{
+  "version": "1.21.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "CdkSagemakerDemoStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "CdkSagemakerDemoStack.template.json"
+      },
+      "metadata": {
+        "/CdkSagemakerDemoStack/MySageMakerNotebook/NotebookRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MySageMakerNotebookNotebookRoleB65273F4",
+            "trace": [
+              "new Role (/Users/mmcclean/Documents/cdk-sagemaker-example/node_modules/@aws-cdk/aws-iam/lib/role.ts:289:18)",
+              "new SageMakerNotebook (/Users/mmcclean/Documents/cdk-sagemaker-example/lib/sagemakernb.ts:22:18)",
+              "new CdkSagemakerDemoStack (/Users/mmcclean/Documents/cdk-sagemaker-example/bin/cdk-sagemaker-demo.ts:12:5)",
+              "Object.<anonymous> (/Users/mmcclean/Documents/cdk-sagemaker-example/bin/cdk-sagemaker-demo.ts:21:1)",
+              "Module._compile (internal/modules/cjs/loader.js:1151:30)",
+              "Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)",
+              "Module.load (internal/modules/cjs/loader.js:1000:32)",
+              "Function.Module._load (internal/modules/cjs/loader.js:899:14)",
+              "Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)",
+              "internal/main/run_main_module.js:17:47"
+            ]
+          }
+        ],
+        "/CdkSagemakerDemoStack/MySageMakerNotebook/MyLifecycleConfig": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MySageMakerNotebookMyLifecycleConfig9B501FC3",
+            "trace": [
+              "new SageMakerNotebook (/Users/mmcclean/Documents/cdk-sagemaker-example/lib/sagemakernb.ts:28:29)",
+              "new CdkSagemakerDemoStack (/Users/mmcclean/Documents/cdk-sagemaker-example/bin/cdk-sagemaker-demo.ts:12:5)",
+              "Object.<anonymous> (/Users/mmcclean/Documents/cdk-sagemaker-example/bin/cdk-sagemaker-demo.ts:21:1)",
+              "Module._compile (internal/modules/cjs/loader.js:1151:30)",
+              "Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)",
+              "Module.load (internal/modules/cjs/loader.js:1000:32)",
+              "Function.Module._load (internal/modules/cjs/loader.js:899:14)",
+              "Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)",
+              "internal/main/run_main_module.js:17:47"
+            ]
+          }
+        ],
+        "/CdkSagemakerDemoStack/MySageMakerNotebook/MyNotebook": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MySageMakerNotebookMyNotebook4FF27214",
+            "trace": [
+              "new SageMakerNotebook (/Users/mmcclean/Documents/cdk-sagemaker-example/lib/sagemakernb.ts:44:5)",
+              "new CdkSagemakerDemoStack (/Users/mmcclean/Documents/cdk-sagemaker-example/bin/cdk-sagemaker-demo.ts:12:5)",
+              "Object.<anonymous> (/Users/mmcclean/Documents/cdk-sagemaker-example/bin/cdk-sagemaker-demo.ts:21:1)",
+              "Module._compile (internal/modules/cjs/loader.js:1151:30)",
+              "Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)",
+              "Module.load (internal/modules/cjs/loader.js:1000:32)",
+              "Function.Module._load (internal/modules/cjs/loader.js:899:14)",
+              "Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)",
+              "internal/main/run_main_module.js:17:47"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "runtime": {
+    "libraries": {
+      "@aws-cdk/core": "1.23.0",
+      "@aws-cdk/cx-api": "1.23.0",
+      "@aws-cdk/aws-iam": "1.23.0",
+      "@aws-cdk/region-info": "1.23.0",
+      "@aws-cdk/aws-sagemaker": "1.23.0",
+      "jsii-runtime": "node.js/v13.8.0"
+    }
+  }
+}

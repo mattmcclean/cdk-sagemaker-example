@@ -1,0 +1,78 @@
+{
+  "Resources": {
+    "MySageMakerNotebookNotebookRoleB65273F4": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "sagemaker.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":iam::aws:policy/AmazonSageMakerFullAccess"
+              ]
+            ]
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkSagemakerDemoStack/MySageMakerNotebook/NotebookRole/Resource"
+      }
+    },
+    "MySageMakerNotebookMyLifecycleConfig9B501FC3": {
+      "Type": "AWS::SageMaker::NotebookInstanceLifecycleConfig",
+      "Properties": {
+        "NotebookInstanceLifecycleConfigName": "fastaiLifecycleConfig",
+        "OnCreate": [
+          {
+            "Content": {
+              "Fn::Base64": "#!/bin/bash\n\nset -e"
+            }
+          }
+        ],
+        "OnStart": [
+          {
+            "Content": {
+              "Fn::Base64": "#!/bin/bash\n\nset -e"
+            }
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkSagemakerDemoStack/MySageMakerNotebook/MyLifecycleConfig"
+      }
+    },
+    "MySageMakerNotebookMyNotebook4FF27214": {
+      "Type": "AWS::SageMaker::NotebookInstance",
+      "Properties": {
+        "InstanceType": "ml.p2.xlarge",
+        "RoleArn": {
+          "Fn::GetAtt": [
+            "MySageMakerNotebookNotebookRoleB65273F4",
+            "Arn"
+          ]
+        },
+        "LifecycleConfigName": "fastaiLifecycleConfig",
+        "NotebookInstanceName": "MyNotebook"
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkSagemakerDemoStack/MySageMakerNotebook/MyNotebook"
+      }
+    }
+  }
+}

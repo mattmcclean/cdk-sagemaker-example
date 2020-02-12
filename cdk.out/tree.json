@@ -1,0 +1,108 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree"
+      },
+      "CdkSagemakerDemoStack": {
+        "id": "CdkSagemakerDemoStack",
+        "path": "CdkSagemakerDemoStack",
+        "children": {
+          "MySageMakerNotebook": {
+            "id": "MySageMakerNotebook",
+            "path": "CdkSagemakerDemoStack/MySageMakerNotebook",
+            "children": {
+              "NotebookRole": {
+                "id": "NotebookRole",
+                "path": "CdkSagemakerDemoStack/MySageMakerNotebook/NotebookRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "CdkSagemakerDemoStack/MySageMakerNotebook/NotebookRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "sagemaker.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/AmazonSageMakerFullAccess"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "MyLifecycleConfig": {
+                "id": "MyLifecycleConfig",
+                "path": "CdkSagemakerDemoStack/MySageMakerNotebook/MyLifecycleConfig",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::SageMaker::NotebookInstanceLifecycleConfig",
+                  "aws:cdk:cloudformation:props": {
+                    "notebookInstanceLifecycleConfigName": "fastaiLifecycleConfig",
+                    "onCreate": [
+                      {
+                        "content": {
+                          "Fn::Base64": "#!/bin/bash\n\nset -e"
+                        }
+                      }
+                    ],
+                    "onStart": [
+                      {
+                        "content": {
+                          "Fn::Base64": "#!/bin/bash\n\nset -e"
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              "MyNotebook": {
+                "id": "MyNotebook",
+                "path": "CdkSagemakerDemoStack/MySageMakerNotebook/MyNotebook",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::SageMaker::NotebookInstance",
+                  "aws:cdk:cloudformation:props": {
+                    "instanceType": "ml.p2.xlarge",
+                    "roleArn": {
+                      "Fn::GetAtt": [
+                        "MySageMakerNotebookNotebookRoleB65273F4",
+                        "Arn"
+                      ]
+                    },
+                    "lifecycleConfigName": "fastaiLifecycleConfig",
+                    "notebookInstanceName": "MyNotebook"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -12,13 +12,13 @@
         "cdk": "cdk"
     },
     "devDependencies": {
-        "@types/node": "^8.9.4",
-        "typescript": "^3.1.2",
-        "aws-cdk": "^0.15.2"
+        "@types/node": "^13.7.1",
+        "typescript": "^3.7.5",
+        "aws-cdk": "^1.23.0"
     },
     "dependencies": {
-        "@aws-cdk/aws-iam": "^0.15.2",
-        "@aws-cdk/aws-sagemaker": "^0.15.2",
-        "@aws-cdk/cdk": "^0.15.2"
+        "@aws-cdk/aws-iam": "^1.23.0",
+        "@aws-cdk/aws-sagemaker": "^1.23.0",
+        "@aws-cdk/cdk": "^0.36.1"
     }
 }

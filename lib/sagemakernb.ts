@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import cdk = require('@aws-cdk/cdk');
+import cdk = require('@aws-cdk/core');
 import iam = require('@aws-cdk/aws-iam');
 import sagemaker = require('@aws-cdk/aws-sagemaker');
 import fs = require('fs');
@@ -16,34 +16,32 @@ export class SageMakerNotebook extends cdk.Construct {
     super(parent, id);
 
     let onStartScript = fs.readFileSync(props.onStartScriptPath, 'utf8');
-    console.log("onStartScript is \n", onStartScript);
     let onCreateScript = fs.readFileSync(props.onCreateScriptPath, 'utf8');
-    console.log("onCreateScript is \n", onCreateScript);
 
     /** Create the IAM Role to be used by SageMaker */
     const role = new iam.Role(this, 'NotebookRole', {
-      assumedBy: new iam.ServicePrincipal('sagemaker.amazonaws.com')
-    });
-    role.attachManagedPolicy('arn:aws:iam::aws:policy/AmazonSageMakerFullAccess');
+      assumedBy: new iam.ServicePrincipal('sagemaker.amazonaws.com'),
+      managedPolicies: [ iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonSageMakerFullAccess') ]
+    })
 
     /** Create the SageMaker Notebook Lifecycle Config */
-    const lifecycleConfig = new sagemaker.cloudformation.NotebookInstanceLifecycleConfigResource(
+    const lifecycleConfig = new sagemaker.CfnNotebookInstanceLifecycleConfig(
         this, 'MyLifecycleConfig', {
       notebookInstanceLifecycleConfigName: 'fastaiLifecycleConfig',
       onCreate: [
         {
-          content: new cdk.FnBase64(onCreateScript!)
+          content: cdk.Fn.base64(onCreateScript!)
         }
       ],
       onStart: [
         {
-          content: new cdk.FnBase64(onStartScript!)
+          content: cdk.Fn.base64(onStartScript!)
         }
       ]
     });
 
     /** Create the SageMaker notebook instance */
-    new sagemaker.cloudformation.NotebookInstanceResource(this, 'MyNotebook', {
+    new sagemaker.CfnNotebookInstance(this, 'MyNotebook', {
       notebookInstanceName: "MyNotebook",
       lifecycleConfigName: lifecycleConfig.notebookInstanceLifecycleConfigName,
       roleArn: role.roleArn,
